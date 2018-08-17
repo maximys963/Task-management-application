@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import '@atlaskit/css-reset';
-import {DragDropContext} from 'react-beautiful-dnd'
+import ReactDOM from 'react-dom'
 import initialData from './initial-data'
 import Column from './column'
-
-
+import '@atlaskit/css-reset'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 class App extends Component{
+
     state = initialData;
 
-    onDragEnd = result => {
+
+    onDragEnd = result =>{
+        // TODO: reorder our column
 
     };
 
 render(){
     return(
-        <DragDropContext
-            onDragEnd={this.onDragEnd}
-        >{
-            this.state.columnOrder.map((columnId)=>{
+
+        <DragDropContext>
+            {this.state.columnOrder.map((columnId)=>{
             const column = this.state.columns[columnId];
-            const tasks = column.tasksIds.map(tasksId => this.state.tasks[tasksId]);
-            return <Column key={column.id} column={column} tasks={tasks}/>;
-        })
-        }
+            const tasks = column.taskIds.map( taskId => this.state.tasks[taskId]);
+            return <Column key={column.id} column={column} tasks={tasks}/>
+        })}
 
-        </DragDropContext>
+        </DragDropContext>)
 
-)
+
 }
 }
 
